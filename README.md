@@ -3,7 +3,7 @@ Proyecto de la creación de un foro para la asignatura "proyecto de aplicación"
 
 # Contexto del proyecto
 El proyecto consistira en un foro para la araucania donde los invitados podran crear su cuenta de usuario, 
-hacer publicaciones y ver las publicaciones de los demas usuarios, tambien podran darle me gusta y comentar.
+los usuarios podran hacer publicaciones y ver las publicaciones de los demas usuarios, tambien podran darle me gusta y comentar.
 
 # Responsabilidades
 Luis Pérez = Foro:  mostrar publicación del usuario, ordenar publicación por popularidad y la interfaz del foro.
