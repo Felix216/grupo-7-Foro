@@ -6,7 +6,7 @@ Luis Pérez = Foro:  mostrar publicación del usuario, ordenar publicación por 
 Felix Santana = Usuario e Invitado: login, registro, autenticacion, interfaz del perfil usuario, modificar perfil, interfaz de creacion de publicacion, modificar publicacion, vista del invitado.
 Camilo Rojas = Gestion del Administrador: eliminar usuarios, eliminar publicaciones, permisos de los usuarios en la página web, interfaz de la lista de usuarios.
 
-#Tecnologias
+# Tecnologias
 Para el proyecto utilizaremos las siguientes tecnologias:
 1.- Spring boot 
 2.- Vue.js
