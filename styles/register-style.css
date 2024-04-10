@@ -10,8 +10,8 @@ body {
 header {
     background-color: #315AB5;
     width: 100%;
-    padding-bottom: 30px;
-    padding-top: 30px;
+    padding-bottom: 50px;
+    padding-top: 50px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 footer {
@@ -27,11 +27,11 @@ footer h4 {
     display: flex;
     align-items: center;
 }
-.navbar a {
-    font-size: 24px;
-    color: white;
-    text-decoration: none;
-    padding-left: 720px;
+.navbar a img {
+    position: absolute;
+    width: 100px;
+    margin-top: -52px;
+    margin-left: 20px;
 }
 .register-container {
     background-color: #315AB5;
@@ -39,7 +39,7 @@ footer h4 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     color: white;
     width: 50%;
-    margin-top: 120px;
+    margin-top: 100px;
     margin-left: 380px;
     padding-top: 24px;
     text-align: center;

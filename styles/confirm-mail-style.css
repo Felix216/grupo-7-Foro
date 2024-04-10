@@ -10,8 +10,8 @@ body {
 header {
     background-color: #315AB5;
     width: 100%;
-    padding-bottom: 30px;
-    padding-top: 30px;
+    padding-bottom: 50px;
+    padding-top: 50px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 footer {
@@ -36,11 +36,11 @@ input {
     display: flex;
     align-items: center;
 }
-.navbar a {
-    font-size: 24px;
-    color: white;
-    text-decoration: none;
-    padding-left: 720px;
+.navbar a img {
+    position: absolute;
+    width: 100px;
+    margin-top: -52px;
+    margin-left: 20px;
 }
 .container {
     background-color: #315AB5;
@@ -52,7 +52,7 @@ input {
     width: 24%;
     padding-top: 24px;
     padding-bottom: 24px;
-    margin-top: 160px;
+    margin-top: 140px;
     margin-bottom: 160px;
     margin-left: 572px;
     text-align: center;

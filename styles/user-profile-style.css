@@ -1,0 +1,104 @@
+* {
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #6781BC;
+}
+header {
+    background-color: #315AB5;
+    width: 100%;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    border-bottom: 4px solid white;
+}
+.navbar {
+    display: flex;
+    align-items: center;
+}
+.navbar a img[alt="logo"] {
+    position: absolute;
+    width: 100px;
+    margin-top: -52px;
+    margin-left: 20px;
+}
+.sidebar-container {
+    background-color: #0E2955;
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 600px;
+    border-right: 4px solid white;
+}
+.publications-container {
+    background-color: #F3F3F3;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    border-radius: 20px;
+    padding-right: 824px;
+    padding-bottom: 590px;
+    margin-left: 318px;
+    margin-top: 50px;
+}
+.info-container {
+    background-color: #F3F3F3;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    border-radius: 20px;
+    padding-right: 280px;
+    padding-bottom: 450px;
+    margin-left: 1190px;
+    margin-top: 50px;
+}
+.name-container {
+    position: absolute;
+    background-color: white;
+    border-radius: 10px;
+    padding-bottom: 140px;
+    padding-right: 200px;
+    margin-top: 190px;
+    margin-left: 40px;
+}
+.home-btn {
+    background-color: rgba(52, 121, 140, 0.2);
+    border-radius: 30px;
+    padding: 12px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 24px;
+    text-align: center;
+}
+.edit-btn {
+    background-color: #140F07;
+    color: white;
+    position: absolute;
+    font-size: 18px;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 10px;
+    padding: 12px;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-top: 370px;
+    margin-left: 85px;
+}
+.sidebar-container a {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
+}
+img[alt="profile-picture-nav"] {
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    margin-top: -38px;
+    margin-left: 94%;
+}
+img[alt="profile-picture"] {
+    position: absolute;
+    margin-left: 70px;
+    margin-top: 30px;
+}
