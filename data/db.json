@@ -1,9 +1,16 @@
 {
-    "users": [
-        {
-            "name": "juan",
-            "email": "juan@ufro.cl",
-            "password": "1243"
-        }
-    ]
+  "users": [
+    {
+      "name": "juan",
+      "email": "juan@ufro.cl",
+      "password": "1243",
+      "id": "cd93"
+    },
+    {
+      "id": "9a1d",
+      "name": "pepe",
+      "email": "pepe@gmail.com",
+      "password": "12431243"
+    }
+  ]
 }
