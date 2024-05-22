@@ -4,6 +4,7 @@ import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import ConfirmMail from '../views/ConfirmMail.vue'
 import ChangePassword from '../views/ChangePassword.vue'
+import UserProfile from '@/views/UserProfile.vue'
 import ForoUsuarioLogeado from '@/views/ForoUsuarioLogeado.vue'
 
 const routes = [
@@ -36,6 +37,11 @@ const routes = [
     name: 'foro',
     path: '/foro',
     component: ForoUsuarioLogeado
+  },
+  {
+    name: 'profile',
+    path: '/profile',
+    component: UserProfile
   }
 ]
 
