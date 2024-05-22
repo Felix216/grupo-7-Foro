@@ -12,7 +12,7 @@
     </div>
 
 
-    <div class="w-screen bg-white shadow-lg shadow-slate-400 flex flex-row  justify-between py-5 ">
+    <div class="bg-white shadow-lg shadow-slate-400 flex flex-row  justify-between py-5 ">
       <!-- Colocar Logo Lado Izquierdo, Y REDIRIGIRLO AL FORO LOGEADO-->
 
       <div v-if="usuario" class="px-10  ">
@@ -24,7 +24,7 @@
 
       <!-- Si usuario posee algun valor, osea que inicio sesion-->
       <div v-if="usuario" class="flex justify-center items-center px-10 ">
-        <router-link @click="limpiarLocalStorage()" to="/"
+        <router-link to="/"
           class="rounded-xl text-base font-medium text-white bg-red-700 px-3 py-2 mr-2 transition hover:scale-110 hover:shadow-2xl hover:bg-red-800 ">Cerrar
           Sesion</router-link>
         <p>COLOCAR ICONO USUARIO</p>
@@ -67,11 +67,6 @@ export default {
 
     }
   },
-  methods: {
-    limpiarLocalStorage() {
-      localStorage.clear();
-    }
-  }
 }
 </script>
 
