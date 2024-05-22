@@ -84,7 +84,7 @@ export default {
             mostrarCrearPublicacion: false,
             isOpen: false,
             titulo: '',
-            categorias: ['Noticia', 'Entretenimiento', 'Deportes', 'Cine'],
+            categorias: ['noticias', 'deportes','humor','juegos','ayuda','otros'],
             categoriaSeleccionada: '',
             descripcion: '',
             imagen: '',
@@ -130,7 +130,7 @@ export default {
         async crearPublicacion() {
 
             if (this.titulo != "" && this.descripcion != "") {
-                const nuevaPublicacion = await crearPublicacionPost(datosUsuarioLogeado().id, this.titulo, this.categoriaSeleccionada, this.imagen, this.descripcion, this.meGusta, this.noMegusta);
+                const nuevaPublicacion = await crearPublicacionPost(datosUsuarioLogeado().id,datosUsuarioLogeado().username, this.titulo, this.categoriaSeleccionada, this.descripcion, this.imagen, this.meGusta, this.noMegusta);
                 console.log(nuevaPublicacion);
                 this.mostrarComponente(false);
                 this.refrescarPublicaciones();

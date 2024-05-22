@@ -1,6 +1,15 @@
 import axios from "axios";
-const API_URL_PUBLICACIONES = "http://localhost:3000/publicaciones";
+const API_URL_PUBLICACIONES = "http://localhost:3000/posts";
 
+export const colorDictionary = {
+  "noticias": "bg-red-600" ,
+  "deportes": "bg-lime-500",
+  "ayuda":"bg-purple-500",
+  "humor":"bg-yellow-400",
+  "juegos":"bg-blue-500",
+  "otros":"bg-gray-400",
+
+};
 export const obtenerPublicaciones = async () => {
   try {
     const resultado = await axios.get(API_URL_PUBLICACIONES);
@@ -31,17 +40,18 @@ export const buscarPublicacion= async (indentificador, valor)=> {
 }
 
 
-export const crearPublicacionPost = async (userId,titulo,categoria,imagen,descripcion,meGusta,NoMeGusta) => {
+export const crearPublicacionPost = async (userId,username,tittle,category,content,image,likes,dislikes) => {
     
   try {
         const nuevaPublicacion = {
         userId,
-        titulo,
-        categoria,
-        descripcion,
-        imagen,
-        meGusta,
-        NoMeGusta
+        username,
+        tittle,
+        category,
+        content,
+        image,
+        likes,
+        dislikes
         };
 
 
@@ -61,4 +71,13 @@ export const datosUsuarioLogeado = () => {
 
   return usuario;
 };
+
+
+export const capitalizarPrimeraPalabra = (string) => {
+  if (!string) return '';
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+
+
 
