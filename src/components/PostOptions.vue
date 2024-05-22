@@ -14,7 +14,7 @@
             </div>
         </div>
         <div v-if="editIsVisible">
-            <EditPost @close="mostrarVentanaEditar()"/>
+            <EditPost @close="mostrarVentanaEditar()" :ID="ID"/>
         </div>
     </div>
   </template>

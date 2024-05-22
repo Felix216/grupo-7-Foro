@@ -7,7 +7,7 @@
                     <span class="ml-2">•</span>
                     <time class="text-xs text-gray-500 ml-2">{{ post.date }}</time>
                 </div>
-                <div>
+                <div v-if="mostrar">
                     <button class="text-gray-500 hover:text-gray-700 focus:outline-none">
                         <PostOptions :postID="post.id"/>
                     </button>
@@ -43,12 +43,18 @@
     import PostOptions from './PostOptions.vue';
     export default {
         components: {
-            PostOptions,
+            PostOptions
         },
         props: {
+            isOwnProfile: Boolean,
             post: {
                 type: Object,
                 required: true
+            },
+        },
+        data() {
+            return {
+                mostrar: this.isOwnProfile,
             }
         }
     };

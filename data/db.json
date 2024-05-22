@@ -39,9 +39,9 @@
     {
       "userId": "33db",
       "username": "pepe",
-      "tittle": "Título de la publicación 1",
-      "category": "Categoría 1",
-      "content": "Descripción de la publicación 1",
+      "tittle": "pepito aca",
+      "category": "Noticia",
+      "content": "wenas",
       "image": "/astronauta.jpg",
       "likes": "25",
       "dislikes": "12",
@@ -49,7 +49,7 @@
       "id": "3366"
     },
     {
-      "userId": "93ef",
+      "userId": "35b8",
       "username": "pepito",
       "tittle": "Título de la publicación 2",
       "category": "Categoría 2",
