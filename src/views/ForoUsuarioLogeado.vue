@@ -1,31 +1,24 @@
 <template>
 
-    <header>
-        <Navbar class="w-screen"> </Navbar>
+    <header class="bg-slate-200  " >
+        <Navbar class="bg-white"> </Navbar>
     </header>
 
 
-    <!-- DATOS USUARIO LOGEADO
 
-    <div class="container mx-auto">
-
-        <p>Usuario: {{ nombre }}</p>
-        <p>Email: {{ correo }}</p>
-        <p>Contraseña: {{ contraseña }}</p>
-    </div>
- -->
+    
+    <div class=" flex flex-row bg-slate-200 py-4  " >
+        <aside-component class = "flex-none w-1/3 " ></aside-component>
 
 
-
-    <div class=" flex flex-row bg-gray-100 w-screen" >
-        <aside-component class=""></aside-component>
-
-
-        <div class="flex flex-col px-20 w-screen">
+        <div class="flex flex-col flex-1 py-5  bg-slate-200 ">
             <crear-publicacion class=""></crear-publicacion>
-            <articulo-component  ref="ArticuloComponent" ></articulo-component>
+            <articulo-component class="flex-grow" ref="ArticuloComponent" ></articulo-component>
 
         </div>
+
+        <noticia-populares ref="NoticiaPopulares"> </noticia-populares>
+
     </div>
 
 
@@ -48,6 +41,8 @@ import AsideComponent from '@/components/AsideComponente.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
 import CrearPublicacion from '@/components/CrearPublicacion.vue'
 import ArticuloComponent from '@/components/ArticuloComponente.vue'
+import NoticiaPopulares from '@/components/NoticiaPopulares.vue'
+
 export default {
     created() {
         const usuario = JSON.parse(localStorage.getItem('usuarioLogeado'));
@@ -66,6 +61,7 @@ export default {
         FooterComponent,
         ArticuloComponent,
         CrearPublicacion,
+        NoticiaPopulares,
 
     },
     data() {
@@ -85,6 +81,7 @@ export default {
         async refrescarPublicaciones(){
             //accedo al componente articuloComponent al metodo fetchPublicacion con el metodo $refs
             this.$refs.ArticuloComponent.fetchPublicaciones();
+            this.$refs.NoticiaPopulares.fetchPublicacionesNoticia();
         }
     }
 }
