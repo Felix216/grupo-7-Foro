@@ -124,6 +124,6 @@
 
 <style>
     .texto {
-        @apply font-bold font-inter mb-4;
+        @apply font-bold mb-4;
     }
 </style>
