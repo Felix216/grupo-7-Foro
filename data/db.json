@@ -11,5 +11,18 @@
       "profileBanner": "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png",
       "password": "Holaa1243!"
     }
+  ],
+  "posts": [
+    {
+      "tittle": "hola queria saber como instalar vue.js",
+      "username": "fefe",
+      "date": "20 mayo 2024",
+      "content": "wena cabros como se instala vue???? ayuda pls",
+      "category": "Ayuda",
+      "likes": "26",
+      "dislikes": "2",
+      "comments": "11",
+      "id": "888f"
+    }
   ]
 }
