@@ -1,8 +1,6 @@
 <template>
-
   <div>
     <div v-if="mostrar && publicacionesOrdenadas.length > 0">
-
       <article class="overflow-hidden rounded-lg shadow transition hover:shadow-2xl px-6 my-4 bg-white "
         v-for="(publicacion, index) in publicacionesOrdenadas" :key="index">
         <div class="flex-auto justify-center my-4">
@@ -68,12 +66,16 @@
 
 
       </article>
+
     </div>
 
 
     <article v-else class="overflow-hidden rounded-lg shadow transition hover:shadow-2xl px-6 my-4  bg-white "
       v-for="(publicacion, index) in publicaciones" :key="index">
       <div class="flex-auto justify-center my-4">
+          <div v-if="mostrarOpciones" class="ms-auto">
+            <PostOptions :postID="post.id"/>
+          </div>
           <span class="mx-2 text-xl font-bold">{{ publicacion.username }}</span>
           <span class="mx-2 rounded-full px-4 py-1 text-base text-white " :class="agregarFondoCategoria(publicacion.category)">
             {{ capitalizarPrimeraPalabra(publicacion.category) }} 
@@ -136,7 +138,6 @@
 
 
     </article>
-
   </div>
 
 
@@ -150,11 +151,16 @@
 <script>
 import { colorDictionary, obtenerPublicaciones } from '@/services/foroService';
 import { capitalizarPrimeraPalabra } from '@/services/foroService';
+import PostOptions from './PostOptions.vue';
 export default {
+  components: {
+    PostOptions,
+  },
   data() {
     return {
       publicaciones: [''],
       colorDictionary,
+      mostrarOpciones: this.isOwnProfile
     }
 
   },
@@ -167,6 +173,11 @@ export default {
       type: Boolean,
       default: false,
     },
+    post: {
+      type: Object,
+      required: true
+    },
+    isOwnProfile: Boolean
   },
 
 
