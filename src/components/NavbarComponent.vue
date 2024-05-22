@@ -16,8 +16,8 @@
 
       <!-- Si Usuario no posee ningun valor, osea ingresa como por default, le aparezca estas opciones  -->
       <div class="mr-10 flex justify-center items-center ">
-        <router-link to="/" class="rounded-xl text-base font-medium text-white bg-red-700 px-3 py-2 mr-4 transition hover:scale-110 hover:shadow-2xl hover:bg-red-800 ">Registrarse</router-link>
-        <router-link to="/" class="rounded-xl text-base font-medium text-white bg-blue-600 px-3 py-2 mr-4 transition hover:scale-110 hover:shadow-2xl hover:bg-blue-800 ">Iniciar Sesion</router-link>
+        <router-link to="/register" class="rounded-xl text-base font-medium text-white bg-red-700 px-3 py-2 mr-4 transition hover:scale-110 hover:shadow-2xl hover:bg-red-800 ">Registrarse</router-link>
+        <router-link to="/login" class="rounded-xl text-base font-medium text-white bg-blue-600 px-3 py-2 mr-4 transition hover:scale-110 hover:shadow-2xl hover:bg-blue-800 ">Iniciar Sesion</router-link>
       </div>
     </div>
 
