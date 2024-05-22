@@ -30,7 +30,7 @@
                     <p v-show="posts.length==0" class="mt-16 mb-4 ml-64">No tienes publicaciones.</p>
                     <ul>
                         <li v-for="post in posts" :key="post.id">
-                            <ArticuloComponente :post="post" :isOwnProfile="isOwnProfile"/>
+                            <PublicationComponent :post="post" :isOwnProfile="isOwnProfile"/>
                         </li>
                     </ul>
                 </div>
@@ -47,14 +47,14 @@
     import NavbarComponent from '../components/NavbarComponent.vue';
     import UserNotFound from '../components/UserNotFound.vue';
     import AsideComponente from '@/components/AsideComponente.vue';
-    import ArticuloComponente from '@/components/ArticuloComponente.vue';
+    import PublicationComponent from '@/components/PublicationComponent.vue';
     export default {
         components: {
             EditProfile,
             NavbarComponent,
             UserNotFound,
             AsideComponente,
-            ArticuloComponente
+            PublicationComponent
         },
         data() {
             return {
