@@ -42,6 +42,23 @@ const routes = [
     name: 'profile',
     path: '/profile/:id',
     component: UserProfile
+  },
+  { 
+    path: '/ForoDefault',
+    name: 'foroDefault',
+    component: () => import('../views/ForoUsuarioDefault.vue')
+  },
+  { 
+    path: '/verPublicacion/:publicaciones',
+    name: 'verPublicacion',
+    component: () => import('../views/VerPublicacion.vue'),
+    props: true,
+  },
+  { 
+    path: '/popular',
+    name: 'popularPublicacion',
+    component: () => import('../views/PublicacionesPopulares.vue'),
+    props: true,
   }
 ]
 
