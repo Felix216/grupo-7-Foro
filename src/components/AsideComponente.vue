@@ -34,7 +34,7 @@
 
         </router-link>
     
-        <router-link to="/Profiel/id" class="relative my-1">
+        <botton @click="this.$router.push(`/profile/${usuario.id}`)" class="relative my-1">
           <div class="flex justify-center px-2 py-1 text-base text-black text-center hover:bg-gray-300 hover:text-gray-900 hover:font-bold  rounded-lg
           md:px-8  lg:px-5 xl:px-3 xl:text-lg md:text-sm">
 
@@ -45,7 +45,7 @@
           <span class="">Perfil</span>
         </div>
 
-        </router-link>
+        </botton>
         <router-link to="/" class="relative my-1" @click=" cerrarSesionUsuario()">
           <div class="flex justify-center px-2 py-1 text-base text-black text-center hover:bg-gray-300 hover:text-gray-900 hover:font-bold  rounded-lg
           xl:text-lg md:text-sm">
@@ -110,6 +110,7 @@ export default {
   data() {
     return {
       usuario: '',
+
     };
   },
 
@@ -125,8 +126,9 @@ export default {
   methods:{
     cerrarSesionUsuario() {
       localStorage.removeItem('usuarioLogeado');
+    },
 
-    }
+
   }
 }
 </script>
