@@ -13,11 +13,27 @@ export const obtenerPublicaciones = async () => {
 
 
 
+export const buscarPublicacion= async (indentificador, valor)=> {
 
+  try {
+    const resultado = await axios.get(API_URL_PUBLICACIONES, {
+      params:{
+        [indentificador]: valor,
+      }
+    });
+    
+    return resultado.data;
+
+} catch (error) {
+    console.log(`Error en obtener todas las publicaciones: ${error.message}`);
+  }
+
+}
 
 
 export const crearPublicacionPost = async (userId,titulo,categoria,imagen,descripcion,meGusta,NoMeGusta) => {
-    try {
+    
+  try {
         const nuevaPublicacion = {
         userId,
         titulo,
