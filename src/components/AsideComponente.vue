@@ -12,7 +12,7 @@
         <router-link to="/Foro"
         class="relative flex items-center w-full rounded-lg text-base font-medium px-16 py-2 text-gray-500 text-center hover:bg-gray-300 hover:text-gray-900 hover:font-bold my-1
               md:px-8  lg:px-10 xl:px-14 xl:text-xl md:text-sm">
-        <img alt="foro" src="@/assets/Home.png" class="absolute inset-0 object-contain  bg-black w-1/4 h-full  rounded-2xl" />
+        <img alt="foro" src="@/assets/Home.png" class="absolute inset-0 object-contain  bg-black w-1/4 h-full rounded-2xl" />
               
               Principal</router-link>
 

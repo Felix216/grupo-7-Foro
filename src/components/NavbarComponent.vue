@@ -24,7 +24,7 @@
 
       <!-- Si usuario posee algun valor, osea que inicio sesion-->
       <div v-if="usuario" class="flex justify-center items-center px-10 ">
-        <router-link to="/"
+        <router-link @click="limpiarLocalStorage()" to="/"
           class="rounded-xl text-base font-medium text-white bg-red-700 px-3 py-2 mr-2 transition hover:scale-110 hover:shadow-2xl hover:bg-red-800 ">Cerrar
           Sesion</router-link>
         <p>COLOCAR ICONO USUARIO</p>
@@ -67,6 +67,11 @@ export default {
 
     }
   },
+  methods: {
+    limpiarLocalStorage() {
+      localStorage.clear();
+    }
+  }
 }
 </script>
 

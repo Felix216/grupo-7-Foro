@@ -1,28 +1,73 @@
 {
   "users": [
     {
-      "id": "a745",
-      "username": "carlos123",
-      "name": "carlos",
+      "username": "pepegamer2002",
+      "name": "juanito",
       "lastname": "perez",
-      "email": "carlos@gmail.com",
-      "description": "hola",
+      "lastname2": "perez",
+      "email": "pepe@ufro.cl",
+      "description": "aklsdhjlksafldksa",
       "profilePicture": "https://i.pinimg.com/550x/57/70/f0/5770f01a32c3c53e90ecda61483ccb08.jpg",
       "profileBanner": "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png",
-      "password": "Holaa1243!"
+      "password": "Palomitas216!",
+      "id": "33db"
+    }
+  ],
+  "categories": [
+    {
+      "deportes": "verde",
+      "noticias": "rojo",
+      "ayuda": "morado",
+      "humor": "amarillo",
+      "juegos": "azul",
+      "otro": "gris claro",
+      "id": "f4f6"
     }
   ],
   "posts": [
     {
-      "tittle": "hola queria saber como instalar vue.js",
-      "username": "fefe",
-      "date": "20 mayo 2024",
-      "content": "wena cabros como se instala vue???? ayuda pls",
-      "category": "Ayuda",
-      "likes": "26",
-      "dislikes": "2",
-      "comments": "11",
-      "id": "888f"
+      "userId": "93ef",
+      "username" : "pepito",
+      "tittle": "Título de la publicación 1",
+      "category": "Categoría 1",
+      "content": "Descripción de la publicación 1",
+      "image": "/astronauta.jpg",
+      "likes": "25",
+      "dislikes": "12",
+      "comments": "2",
+      "id": "3366"
+    },
+    {
+      "userId": "93ef",
+      "username" : "pepito",
+      "tittle": "Título de la publicación 2",
+      "category": "Categoría 2",
+      "content": "Descripción de la publicación 2",
+      "image": "/logo.png",
+      "likes": "45",
+      "dislikes": "5",
+      "comments": "2",
+      "id": "7484"
+    }
+  ],
+  "comments": [
+    {
+      "userId": "93ef",
+      "postId": "3366",
+      "content": "Ahi noma esta esto 1.0",
+      "id": "58e6"
+    },
+    {
+      "userId": "93ef",
+      "postId": "7484",
+      "content": "todo malo un 1.0",
+      "id": "7700"
+    },
+    {
+      "userId": "07e7",
+      "postId": "723b",
+      "content": "Ahi noma esta esto 5.0 o un 3.9",
+      "id": "3b84"
     }
   ]
 }
