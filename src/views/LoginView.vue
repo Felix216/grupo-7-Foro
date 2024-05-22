@@ -45,7 +45,7 @@
 
                     if (result.status==200 && result.data.length > 0) {
                         localStorage.setItem("usuarioLogeado", JSON.stringify(result.data[0]));
-                        this.$router.push({name: 'foro'});
+                        this.$router.push({name: 'profile'});
                     } else {
                         alert('Correo electronico o contraseña incorrectos.');
                     }

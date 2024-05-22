@@ -2,10 +2,10 @@
     <div class="bg-slate-100 flex">
         <!-- SIDEBAR -->
         <div class="bg-white m-8 p-16 h-96 rounded border border-gray-300 flex flex-col justify-evenly fixed left-0">
-            <a href="#" class="texto">Home</a>
-            <a href="#" class="texto">Settings</a>
-            <a href="#" class="texto">Profile</a>
-            <a href="#" class="texto">Log out</a>
+            <a href="#">Home</a>
+            <a href="#">Settings</a>
+            <a href="#">Profile</a>
+            <a href="#">Log out</a>
         </div>
         <!-- CONTAINER PRINCIPAL -->
         <div class="flex flex-col relative bg-white my-8 ml-64 mr-8 rounded border border-gray-300 max-w-2xl">
@@ -100,9 +100,3 @@
         }
     }
 </script>
-
-<style>
-    .texto {
-        @apply font-bold font-inter;
-    }
-</style>
