@@ -12,9 +12,9 @@
                     <img :src="this.user.profilePicture" alt="banner" class="w-20 h-20 mb-2 ml-2 rounded border border-gray-200">
                     <div class="flex flex-col ml-10 mb-4 mt-4">
                         <label for="subirAvatar" class="bg-blue-600 text-white rounded px-6 py-2 mb-2 hover:bg-blue-500 shadow">Subir Avatar</label>
-                        <input id="subirAvatar" type="file" class="hidden"/>
-                        <label for="subirAvatar" class="bg-blue-600 text-white rounded px-6 py-2 mb-2 hover:bg-blue-500 shadow">Subir Portada</label>
-                        <input  id="subirAvatar" type="file" class="hidden"/>
+                        <input id="subirAvatar" type="file" @change="archivoSeleccionado('perfil', $event)" class="hidden"/>
+                        <label for="subirBanner" class="bg-blue-600 text-white rounded px-6 py-2 mb-2 hover:bg-blue-500 shadow">Subir Portada</label>
+                        <input  id="subirBanner" type="file" @change="archivoSeleccionado('banner', $event)" class="hidden"/>
                     </div>
                 </div>
                 <label class="ml-2">Nombre de Usuario</label>
@@ -40,7 +40,9 @@
                 username: this.user.username,
                 name: this.user.name,
                 lastname: this.user.lastname,
-                description: this.user.description
+                description: this.user.description,
+                perfil: null,
+                banner: null
             }
         },
         methods: {
@@ -55,7 +57,9 @@
                             username: this.username,
                             name: this.name,
                             lastname: this.lastname,
-                            description: this.description   
+                            description: this.description,
+                            profilePicture: this.perfil,
+                            profileBanner: this.banner
                         }
                     );
 
@@ -86,6 +90,23 @@
             },
             cerrar() {
                 this.$emit('close');
+            },
+            archivoSeleccionado(tipo, evento) {
+                let files = evento.target.files || evento.dataTransfer.files;
+                if (!files.length)
+                    return;
+                this.crearImagenJSON(tipo, files[0]);
+            },
+            crearImagenJSON(tipo, archivo) {
+                let leerArchivo = new FileReader();
+                leerArchivo.onload = (e) => {
+                    if (tipo === 'perfil') {
+                        this.perfil = e.target.result;
+                    } else if (tipo === 'banner') {
+                        this.banner = e.target.result;
+                    }
+                };
+                leerArchivo.readAsDataURL(archivo);
             }
         }
     }
