@@ -32,12 +32,14 @@ public class Comment {
 
      //Relacion con Usuario,  1 usuario puede tener muchos comentarios
 
-
+     @ManyToOne
+     @JoinColumn(name = "user_id",nullable = false)
+     private User user;
 
      //Relacion con publicaciones, 1 publicacion puede tener muchos comentarios
      // lo mismo que decir = "Muchos comentarios estan en 1 publicacion"
     @ManyToOne
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 
 
