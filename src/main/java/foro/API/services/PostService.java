@@ -6,22 +6,26 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 
 import foro.API.models.Post;
+import foro.API.models.User;
 import foro.API.repositories.PostRepositorio;
 
 @Service
 public class PostService {
-    @Autowired
-    PostRepositorio postRepository;
+    
+    private final PostRepositorio postRepository;
+    private final UserService userService;
 
     private final String storageLocation = "uploads/";
 
-    public PostService() {
+    public PostService(PostRepositorio postRepository, UserService userService) {
+        this.postRepository = postRepository;
+        this.userService = userService;
+
         try {
             Files.createDirectories(Paths.get(storageLocation));
         } catch (IOException e) {
@@ -39,39 +43,54 @@ public class PostService {
     }
 
     // Crear Publicacion
-     public Post createPost(String tittle, String category, String content, MultipartFile image, int likes, int dislikes) throws Exception {
+    public Post createPost(Long userId,String tittle, String category, String content, MultipartFile image)
+            throws Exception {
         try {
             Post post = new Post();
+            User user = userService.getUserByID(userId);
             post.setTittle(tittle);
             post.setCategory(category);
             post.setContent(content);
-            post.setLikes(likes);
-            post.setDisLikes(dislikes);
-
+            post.setUser(user); // Asignar el usuario a la publicación
+        
             if (image != null && !image.isEmpty()) {
                 String imageUrl = storeFile(image);
                 post.setImage(imageUrl);
             }
+            Post savedPost = postRepository.save(post);
 
-            return postRepository.save(post);
+            return savedPost;
         } catch (IOException e) {
             throw new Exception("Error storing image: " + e.getMessage());
         }
     }
-        
 
+    //Ordenar Popularidad
+    public List<Post> getPostsOrderByLikes() {
+        List<Post> posts = postRepository.findAll();
 
-    // Ordenar Por Popularidad
-    public List<Post> getAllPopular() throws Exception {
-        try {
-            List<Post> allPosts = postRepository.findAll();
-            return allPosts
-                    .stream()
-                    .sorted((p1, p2) -> Integer.compare(p2.getLikes(), p1.getLikes()))
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new Exception("Error fetching data: " + e.getMessage());
-        }
+        posts.sort((post1, post2) -> {
+            int likesPost1 = countLikes(post1);
+            int likesPost2 = countLikes(post2);
+            // Orden descendente (mayor cantidad de likes primero)
+            return Integer.compare(likesPost2, likesPost1);
+        });
+
+        return posts;
+    }
+
+    private int countLikes(Post post) {
+
+        return post.getInteractionsPostList().stream()
+                .filter(interaction -> interaction.isTypeInteraction()) // Filtrar solo los likes
+                .collect(Collectors.toList())
+                .size();
+    }
+
+    // Obtener Post por ID
+    public Post getPostByID(Long ID) throws Exception {
+        return postRepository.findById(ID).orElseThrow(
+                () -> new Exception("This post doesn't exist!"));
     }
 
 
