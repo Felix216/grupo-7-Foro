@@ -48,7 +48,7 @@ const routes = [
     component: () => import('../views/ForoUsuarioDefault.vue')
   },
   { 
-    path: '/verPublicacion/:publicaciones',
+    path: '/verPublicacion/:postId',
     name: 'verPublicacion',
     component: () => import('../views/VerPublicacion.vue'),
     props: true,

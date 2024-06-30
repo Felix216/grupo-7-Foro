@@ -58,7 +58,7 @@
 
           <div>
 
-            <router-link :to="{ name: 'verPublicacion', params: { publicaciones: JSON.stringify(publicacion) } }">Ver
+            <router-link :to="{ name: 'verPublicacion', params: { postId: publicacion.publicaciones.id } }">Ver
               mas</router-link>
           </div>
         </div>
@@ -87,7 +87,7 @@
 
       <div class="bg-white p-4 sm:p-6">
 
-        <h3 class="mt-0.5 text-lg text-gray-900">{{ publicacion.publicacion.tittle }}</h3>
+        <h3 class="mt-0.5 text-lg text-gray-900">{{ publicacion.publicacion.tittle }} </h3>
 
         <p  class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">{{ publicacion.publicacion.content }}</p>
 
@@ -138,7 +138,7 @@
 
         <div>
 
-          <router-link :to="{ name: 'verPublicacion', params: { publicaciones: JSON.stringify(publicacion) } }">Ver
+          <router-link :to="{ name: 'verPublicacion', params: { postId: publicacion.publicacion.id } }" >Ver
             mas</router-link>
         </div>
       </div>

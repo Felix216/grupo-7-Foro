@@ -63,6 +63,16 @@ export const obtenerPublicacionesPopulares= async () => {
   }
 };
 
+export const obtenerPublicacionesPorId= async (postId) => {
+  try {
+    const resultado = await axios.get(`${API_URL_POST}/${postId}`);
+    console.log("Resultado del post "+postId+" | POST : ",resultado.data)
+    return resultado.data;
+
+} catch (error) {
+    console.log(`Error en obtener todas las Interacciones: ${error.message}`);
+  }
+};
 
 
 export const buscarPublicacion= async (indentificador, valor)=> {
