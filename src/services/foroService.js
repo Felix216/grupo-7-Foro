@@ -102,6 +102,16 @@ export const buscarPublicacion= async (indentificador, valor)=> {
 
 }
 
+export const obtenerPublicacionesPorCategoria = async (categoria) => {
+  try {
+    const response = await axios.get(`${API_URL_POST}/category/${categoria}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error al obtener publicaciones por categoría: ${error.message}`);
+    throw error;
+  }
+};
+
 /*
 export const crearPublicacionPost = async (userId,username,tittle,category,content,image,likes,dislikes) => {
     
