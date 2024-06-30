@@ -35,7 +35,7 @@
 
 
 <script>
-import { obtenerPublicacionesPopulares, obtenerComentarios,obtenerInteraccion } from '@/services/foroService';
+import { obtenerPublicacionesPopulares, obtenerComentarios,obtenerInteraccion, obtenerUsuarioPorID } from '@/services/foroService';
 import AsideComponent from '@/components/AsideComponente.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
 import NavbarComponent from '@/components/NavbarComponent.vue';
@@ -79,11 +79,13 @@ export default {
             for (const publicacion of publicaciones) {
               const comentarios = await obtenerComentarios(publicacion.id);
               const interaccion = await obtenerInteraccion(publicacion.id);
+              const usuarios = await obtenerUsuarioPorID(publicacion.user);
               // Agregar la publicación junto con sus comentarios al arreglo
               this.publicacionesCompleta.push({
                 publicaciones: publicacion,
                 comentarios: comentarios,
-                interaccion:interaccion
+                interaccion:interaccion,
+                usuarios: usuarios
 
               });
             }

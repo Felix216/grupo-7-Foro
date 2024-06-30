@@ -13,7 +13,7 @@
             <article v-if="publicacion" class="overflow-hidden rounded-lg shadow transition hover:shadow-2xl px-6 my-4  bg-white ">
             
                 <div class="flex-auto justify-center my-4">
-                    <span class="mx-2 text-xl font-bold"  >{{publicacion.user }} </span>
+                    <span class="mx-2 text-xl font-bold"  >{{usuario.username }} </span>
                     <span class="mx-2 text-xl font-bold"  >{{publicacion.category }} </span>
 
                     <span class="mx-2 rounded-full px-4 py-1 text-base text-white " :class="agregarFondoCategoria(publicacion.category)">
@@ -75,7 +75,7 @@
 import NavbarComponent from '@/components/NavbarComponent.vue';
 import AsideComponent from '@/components/AsideComponente.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
-import { capitalizarPrimeraPalabra,obtenerPublicacionesPorId,obtenerComentarios,obtenerInteraccion } from '@/services/foroService';
+import { capitalizarPrimeraPalabra,obtenerPublicacionesPorId,obtenerComentarios,obtenerInteraccion, obtenerUsuarioPorID } from '@/services/foroService';
 import { colorDictionary } from '@/services/foroService';
 import { onMounted,ref } from 'vue';
 
@@ -96,6 +96,7 @@ export default {
       const publicacion = ref(null);
       const comentarios = ref([]);
       const interaccion = ref([]);
+      const usuario = ref([])
 
       let interaccionesVerdaderas = ref([]);
       let interaccionesFalsas = ref([]);
@@ -107,7 +108,11 @@ export default {
           // Obtener la publicación por su ID
             const resultadoPublicacion = await obtenerPublicacionesPorId(props.postId);
             publicacion.value = resultadoPublicacion;
-            console.log("VER PUBLI: ",publicacion.value);
+            console.log("VER PUBLI PERO EL ID DEL USUARIO : ",publicacion.value);
+            
+            const resultadoUsuario = await obtenerUsuarioPorID(publicacion.value.user)
+            usuario.value = resultadoUsuario;
+            console.log("USUARIO DE LA PUBLICACION -> : ",usuario.value);
 
             // Obtener comentarios de la publicación
             const resultadoComentarios = await obtenerComentarios(props.postId);
@@ -133,6 +138,7 @@ export default {
         publicacion,
         comentarios,
         interaccion,
+        usuario,
         interaccionesVerdaderas,
         interaccionesFalsas,
         agregarFondoCategoria: (categoria) => colorDictionary[categoria],

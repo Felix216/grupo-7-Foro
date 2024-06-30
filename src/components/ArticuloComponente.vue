@@ -4,10 +4,10 @@
       <article class="overflow-hidden rounded-lg shadow transition hover:shadow-2xl px-6 my-4 bg-white "
   
       v-for="(publicacion, index) in publicacionesOrdenadas" :key="index">
-        <div class="flex-auto justify-center my-4">
-          <span class="mx-2 text-xl font-bold">{{ publicacion.username }}</span>
-          <span class="mx-2 rounded-full px-4 py-1 text-base text-white " :class="agregarFondoCategoria(publicacion.category)">
-            {{ capitalizarPrimeraPalabra(publicacion.category) }} 
+        <div  class="flex-auto justify-center my-4">
+          <span class="mx-2 text-xl font-bold">{{ publicacion.usuarios.username }}</span>
+          <span class="mx-2 rounded-full px-4 py-1 text-base text-white " :class="agregarFondoCategoria(publicacion.publicaciones.category)">
+            {{ capitalizarPrimeraPalabra(publicacion.publicaciones.category) }} 
           </span>
         </div>
 
@@ -76,10 +76,10 @@
 
 
     <article v-else class="overflow-hidden rounded-lg shadow transition hover:shadow-2xl px-6 my-4  bg-white "
-      v-for="(publicacion, index) in publicacionesConComentarios" :key="index">
-      <div class="flex-auto justify-center my-4">
-          <span class="mx-2 text-xl font-bold">{{ publicacion.publicacion.username }}</span>
-          <span class="mx-2 rounded-full px-4 py-1 text-base text-white " :class="agregarFondoCategoria(publicacion.publicacion.category)">
+      v-for="(publicacion, index) in publicaciones" :key="index">
+      <div v-if="publicacion.usuarios" class="flex-auto justify-center my-4">
+          <span class="mx-2 text-xl font-bold">{{ publicacion.usuarios.username }}</span>
+          <span class="mx-2 rounded-full px-4 py-1  text-base text-white " :class="agregarFondoCategoria(publicacion.publicacion.category)">
             {{ capitalizarPrimeraPalabra(publicacion.publicacion.category) }} 
           </span>
         </div>
@@ -158,15 +158,14 @@
 </template>
 
 <script>
-import { colorDictionary, obtenerPublicaciones,obtenerComentarios, obtenerInteraccion } from '@/services/foroService';
+import { colorDictionary, obtenerPublicaciones,obtenerComentarios, obtenerInteraccion,obtenerUsuarioPorID } from '@/services/foroService';
 import { capitalizarPrimeraPalabra } from '@/services/foroService';
 export default {
   data() {
     return {
       //publicaciones: [''],
-      interacciones:[''],
       //comentarios: [''],
-      publicacionesConComentarios:[],
+      publicaciones:[],
       colorDictionary,
     }
 
@@ -181,7 +180,6 @@ export default {
       default: false,
     }
   },
-
 
 
   async mounted() {
@@ -206,16 +204,19 @@ export default {
         for (const publicacion of publicaciones) {
           const comentarios = await obtenerComentarios(publicacion.id);
           const interaccion = await obtenerInteraccion(publicacion.id);
+          const usuarios = await obtenerUsuarioPorID(publicacion.user);
           // Agregar la publicación junto con sus comentarios al arreglo
-          this.publicacionesConComentarios.push({
+          this.publicaciones.push({
             publicacion: publicacion,
             comentarios: comentarios,
-            interaccion:interaccion
+            interaccion:interaccion,
+            usuarios: usuarios
             
+
           });
         }
         
-        console.log("Publicaciones con comentarios:", this.publicacionesConComentarios);
+        console.log("Publicaciones con comentarios:", this.publicaciones);
       } catch (error) {
         console.error("Error al obtener publicaciones con comentarios:", error.message);
       }
