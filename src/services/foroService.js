@@ -8,6 +8,16 @@ const API_URL_POST ="http://localhost:8081/api/posts"
 const API_URL_COMMENT = "http://localhost:8081/api/posts/comments"
 const API_URL_INTERACTION = "http://localhost:8081/api/interactions"
 
+export const obtenerUsuarioPorID = async (userID) => {
+  try {
+    const resultado = await axios.get(`http://localhost:8081/api/users/${userID}`);
+    console.log("Usuario encontrado: ", resultado.data)
+    return resultado.data;
+
+} catch (error) {
+    console.log(`Error al buscar el Usuario: ${error.message}`);
+  } 
+}
 
 export const colorDictionary = {
   "noticias": "bg-red-600" ,
