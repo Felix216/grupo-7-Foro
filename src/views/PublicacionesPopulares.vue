@@ -9,8 +9,8 @@
 
 
         <div class="flex flex-col  py-5  bg-slate-200  w-screen">
-            <articulo-componente class="flex-grow" :publicacionesOrdenadas="publicacionesOrdenadas" :mostrar = "mostrar=true" > </articulo-componente>
-            
+            <!-- <articulo-componente class="flex-grow" :publicacionesOrdenadas="publicacionesOrdenadas" :mostrar = "mostrar=true" > </articulo-componente> -->
+            <articulo-componente class="flex-grow" :publicacionesOrdenadas="publicacionesOrdenadas" :mostrar="mostrar=true"></articulo-componente>
 
         </div>
 
@@ -35,7 +35,7 @@
 
 
 <script>
-import { obtenerPublicaciones } from '@/services/foroService';
+import { obtenerPublicacionesPopulares, obtenerComentarios,obtenerInteraccion } from '@/services/foroService';
 import AsideComponent from '@/components/AsideComponente.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
 import NavbarComponent from '@/components/NavbarComponent.vue';
@@ -53,7 +53,7 @@ export default {
 
     data() {
         return {
-            publicaciones: [],
+            publicacionesCompleta:[],
             mostrar: false,
 
         }
@@ -66,19 +66,30 @@ export default {
 
     computed: {
         publicacionesOrdenadas() {
-            return this.publicaciones.slice().sort((a, b) => b.likes - a.likes);
+            //return this.publicaciones.slice().sort((a, b) => b.likes - a.likes);
+            return this.publicacionesCompleta;
         },
     },
-    methods: {
-        async fetchPublicaciones() {
-            this.publicaciones = await obtenerPublicaciones();
-        },
+    methods:{
+        async fetchPublicaciones(){
 
+            const publicaciones = await obtenerPublicacionesPopulares();
+    
+            // Iterar sobre cada publicación para obtener y almacenar sus comentarios
+            for (const publicacion of publicaciones) {
+              const comentarios = await obtenerComentarios(publicacion.id);
+              const interaccion = await obtenerInteraccion(publicacion.id);
+              // Agregar la publicación junto con sus comentarios al arreglo
+              this.publicacionesCompleta.push({
+                publicaciones: publicacion,
+                comentarios: comentarios,
+                interaccion:interaccion
 
-
-    }
+              });
+            }
+        }
    
-
+    }
 }
 </script>
 
