@@ -50,4 +50,13 @@ public class CommentService {
         }
     }
 
+    
+    public List<Comment> getAllCommets()throws Exception{
+        try{
+            return commentRepository.findAll();
+        }catch(Exception e){
+            throw new Exception("Error fetching data: " + e.getMessage());
+        }
+    }
+
 }
