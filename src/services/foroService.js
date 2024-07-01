@@ -83,23 +83,6 @@ export const obtenerPublicacionesPorId= async (postId) => {
 };
 
 
-export const buscarPublicacion= async (indentificador, valor)=> {
-
-  try {
-    const resultado = await axios.get(API_URL_POST, {
-      params:{
-        [indentificador]: valor,
-      }
-    });
-    
-    return resultado.data;
-
-} catch (error) {
-    console.log(`Error en obtener todas las publicaciones: ${error.message}`);
-  }
-
-}
-
 export const obtenerPublicacionesPorCategoria = async (categoria) => {
   try {
     const response = await axios.get(`${API_URL_POST}/category/${categoria}`);
@@ -129,6 +112,40 @@ export const crearPublicacionPost = async (userId, tittle, category, content, im
     return resultado.data;
   } catch (error) {
     console.log(`Error en crear una publicación: ${error.message}`);
+  }
+};
+
+
+// INTERACTION PETICIONES 
+export const likePost = async (userId, postId) => {
+  try {
+    const response = await axios.post(`${API_URL_INTERACTION}/like`, null, {
+      params: {
+        userId: userId,
+        postId: postId,
+      },
+    });
+    console.log("Like interaction created: ", response.data);
+    return response.data;
+  } catch (error) {
+    console.error(`Error creating like interaction: ${error.message}`);
+    throw error;
+  }
+};
+
+export const dislikePost = async (userId, postId) => {
+  try {
+    const response = await axios.post(`${API_URL_INTERACTION}/dislike`, null, {
+      params: {
+        userId: userId,
+        postId: postId,
+      },
+    });
+    console.log("Dislike interaction created: ", response.data);
+    return response.data;
+  } catch (error) {
+    console.error(`Error creating dislike interaction: ${error.message}`);
+    throw error;
   }
 };
 

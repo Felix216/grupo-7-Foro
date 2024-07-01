@@ -14,8 +14,6 @@
             
                 <div class="flex-auto justify-center my-4">
                     <span class="mx-2 text-xl font-bold"  >{{usuario.username }} </span>
-                    <span class="mx-2 text-xl font-bold"  >{{publicacion.category }} </span>
-
                     <span class="mx-2 rounded-full px-4 py-1 text-base text-white " :class="agregarFondoCategoria(publicacion.category)">
                         {{capitalizarPrimeraPalabra(publicacion.category) }}
                     </span>
@@ -75,7 +73,7 @@
 import NavbarComponent from '@/components/NavbarComponent.vue';
 import AsideComponent from '@/components/AsideComponente.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
-import { capitalizarPrimeraPalabra,obtenerPublicacionesPorId,obtenerComentarios,obtenerInteraccion, obtenerUsuarioPorID } from '@/services/foroService';
+import { capitalizarPrimeraPalabra,obtenerPublicacionesPorId,obtenerComentarios,obtenerInteraccion, obtenerUsuarioPorID, likePost,dislikePost, datosUsuarioLogeado } from '@/services/foroService';
 import { colorDictionary } from '@/services/foroService';
 import { onMounted,ref } from 'vue';
 
@@ -96,7 +94,8 @@ export default {
       const publicacion = ref(null);
       const comentarios = ref([]);
       const interaccion = ref([]);
-      const usuario = ref([])
+      const usuario = ref([]);
+      const user = datosUsuarioLogeado();
 
       let interaccionesVerdaderas = ref([]);
       let interaccionesFalsas = ref([]);
@@ -130,6 +129,35 @@ export default {
           console.error('Error al cargar la publicación:', error.message);
         }
       };
+      const darMeGusta = async () => {
+      if (user) {
+        console.log("quien es user -> ",user.id);
+        try {
+          await likePost(user.id, props.postId);
+          const resultadoInteraccion = await obtenerInteraccion(props.postId);
+          interaccion.value = resultadoInteraccion;
+          interaccionesVerdaderas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === true);
+          interaccionesFalsas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === false);
+        } catch (error) {
+          console.error('Error al dar like:', error.message);
+        }
+      }
+    };
+
+    const darNoMeGusta = async () => {
+      if (user) {
+        try {
+          await dislikePost(user.id, props.postId);
+          const resultadoInteraccion = await obtenerInteraccion(props.postId);
+          interaccion.value = resultadoInteraccion;
+          interaccionesVerdaderas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === true);
+          interaccionesFalsas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === false);
+        } catch (error) {
+          console.error('Error al dar dislike:', error.message);
+        }
+      }
+    };
+
 
       // Cargar la publicación al montar el componente
       onMounted(cargarPublicacion);
@@ -143,40 +171,14 @@ export default {
         interaccionesFalsas,
         agregarFondoCategoria: (categoria) => colorDictionary[categoria],
         capitalizarPrimeraPalabra,
+        darMeGusta,
+        darNoMeGusta
 
       };
     }
   };
 
-    /*data() {
-        return {
-            publicacion: JSON.parse(this.$route.params.publicaciones),
-            colorDictionary,
-        }
-    },
-
-
-    methods: {
-        capitalizarPrimeraPalabra,
-
-        darMeGusta() {
-
-        },
-        darNoMeGusta() {
-
-        },
-        agregarComentario() {
-
-        },
-        agregarFondoCategoria(categoria){
-            //cambiar color del bg de span publicacion-category dependiendo de su valor por ejemplo si es Noticias = el bg sera rojo
-            return colorDictionary[categoria]
-        }
-
-    }
-
-
-}*/
+    
 </script>
 
 <style></style>
