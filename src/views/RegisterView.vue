@@ -60,18 +60,15 @@
                     return;
                 }
                 try {
-                    let result = await axios.post("http://localhost:3000/users", {
+                    let result = await axios.post("http://localhost:8081/api/users", {
                         username: this.username,
                         name: this.name,
                         lastname: this.lastname,
                         email: this.email,
-                        description: '',
-                        profilePicture: "https://i.pinimg.com/550x/57/70/f0/5770f01a32c3c53e90ecda61483ccb08.jpg",
-                        profileBanner: "https://htmlcolorcodes.com/assets/images/colors/gray-color-solid-background-1920x1080.png",
                         password: this.password
                     });
 
-                    if (result.status == 201) {
+                    if (result.status == 200) {
                         this.$router.push({ name: 'login' });
                     }
                 } catch (error) {
