@@ -58,6 +58,12 @@ const routes = [
     name: 'popularPublicacion',
     component: () => import('../views/PublicacionesPopulares.vue'),
     props: true,
+  },
+  { 
+    path: '/filtrado',
+    name: 'FiltradoPublicaciones',
+    component: () => import('../views/FiltroPublicaciones.vue'),
+    props: true,
   }
 ]
 
