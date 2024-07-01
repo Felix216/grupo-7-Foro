@@ -1,8 +1,12 @@
 package foro.API.controllers;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +23,12 @@ public class InteractionController {
  
     @Autowired
     private InteractionService interactionService;
+
+    @GetMapping("/{postId}")
+    public ResponseEntity<List<Interaction>> getInteractionForPost(@PathVariable Long postId) throws Exception {
+        List<Interaction> comments = interactionService.getAllInteractionsForPost(postId);
+        return ResponseEntity.ok(comments);
+    }
 
     @PostMapping("/like")
     public ResponseEntity<Interaction> likePost(
