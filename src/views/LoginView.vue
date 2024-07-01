@@ -41,11 +41,17 @@
                     return;
                 }
                 try {
-                    let result = await axios.get(`http://localhost:3000/users?email=${this.email}&password=${this.password}`);
+                    let result = await axios.post("http://localhost:8081/api/auth/login",
+                        {
+                            email: this.email,
+                            password: this.password
+                        }
+                    );
 
-                    if (result.status==200 && result.data.length > 0) {
-                        localStorage.setItem("usuarioLogeado", JSON.stringify(result.data[0]));
-                        this.$router.push(`/profile/${result.data[0].id}`);
+                    if (result.status == 200) {
+                        const user = result.data;
+                        localStorage.setItem("usuarioLogeado", JSON.stringify(user));
+                        this.$router.push(`/profile/${user.id}`);
                     } else {
                         alert('Correo electronico o contraseña incorrectos.');
                     }
