@@ -15,18 +15,26 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping("/api/posts/comments")
+@CrossOrigin(origins = "http://localhost:8080") // Permite solicitudes desde tu frontend
 @RequiredArgsConstructor
 public class CommentController {
 
     @Autowired
     private CommentService commentService;
 
+    
+    @GetMapping
+    public ResponseEntity<List<Comment>> getCommentsByPostId() throws Exception {
+        List<Comment> comments = commentService.getAllCommets();
+        return ResponseEntity.ok(comments);
+    }
     @GetMapping("/{postId}")
     public ResponseEntity<List<Comment>> getCommentsByPostId(@PathVariable Long postId) throws Exception {
         List<Comment> comments = commentService.getAllCommetsForPost(postId);
@@ -42,5 +50,4 @@ public class CommentController {
         Comment comment = commentService.createComment(content,userId,postID);
         return new ResponseEntity<>(comment, HttpStatus.CREATED);
     }
-    
 }
