@@ -42,11 +42,19 @@ public class UserService {
         User userToUpdate = userRepository.findById(userDetails.getId())
         .orElseThrow(() -> new Exception("This user doesn't exist!"));
 
-        userToUpdate.setUsername(userToUpdate.getUsername());
-        userToUpdate.setName(userToUpdate.getName());
-        userToUpdate.setLastname(userToUpdate.getLastname());
-        userToUpdate.setEmail(userToUpdate.getEmail());
-        userToUpdate.setPassword(userToUpdate.getPassword());
+        userToUpdate.setUsername(userDetails.getUsername());
+        userToUpdate.setName(userDetails.getName());
+        userToUpdate.setLastname(userDetails.getLastname());
+        userToUpdate.setEmail(userDetails.getEmail());
+        userToUpdate.setPassword(userDetails.getPassword());
+
+        return userRepository.save(userToUpdate);
+    }
+    public User updatePassword(Long id, String password) throws Exception {
+        User userToUpdate = userRepository.findById(id)
+        .orElseThrow(() -> new Exception("This user doesn't exist!"));
+
+        userToUpdate.setPassword(password);
 
         return userRepository.save(userToUpdate);
     }

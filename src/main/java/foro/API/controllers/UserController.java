@@ -1,10 +1,7 @@
 package foro.API.controllers;
 
-import java.util.Optional;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import foro.API.dto.PasswordChangeRequest;
 import foro.API.models.User;
 import foro.API.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -43,9 +41,12 @@ public class UserController {
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
-        Optional<User> user = userService.findByEmail(email);
-        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
+        try {
+            return ResponseEntity.ok(userService.findByEmail(email));
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
@@ -75,5 +76,14 @@ public class UserController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-    
+
+    @PutMapping("/{id}/updatePassword")
+    public ResponseEntity<?> updatePassword(@PathVariable Long id, @RequestBody PasswordChangeRequest passwordChangeRequest) {
+        try {
+            String newPassword = passwordChangeRequest.getPassword();
+            return ResponseEntity.ok(userService.updatePassword(id, newPassword));
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }   
 }
