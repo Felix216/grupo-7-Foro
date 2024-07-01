@@ -9,47 +9,60 @@
         <aside-component></aside-component>
 
         <div class=" px-20 w-full">
-            
-            <article v-if="publicacion" class="overflow-hidden rounded-lg shadow transition hover:shadow-2xl px-6 my-4  bg-white ">
-            
+
+            <article v-if="publicacion"
+                class="overflow-hidden rounded-lg shadow transition hover:shadow-2xl px-6 my-4  bg-white ">
+
                 <div class="flex-auto justify-center my-4">
-                    <span class="mx-2 text-xl font-bold"  >{{usuario.username }} </span>
-                    <span class="mx-2 rounded-full px-4 py-1 text-base text-white " :class="agregarFondoCategoria(publicacion.category)">
-                        {{capitalizarPrimeraPalabra(publicacion.category) }}
+                    <span class="mx-2 text-xl font-bold">{{ usuario.username }} </span>
+                    <span class="mx-2 rounded-full px-4 py-1 text-base text-white "
+                        :class="agregarFondoCategoria(publicacion.category)">
+                        {{ capitalizarPrimeraPalabra(publicacion.category) }}
                     </span>
                 </div>
 
 
                 <div class="bg-white p-4 sm:p-6">
 
-                    <h3 class="mt-0.5 text-2xl text-gray-900 font-bold">{{publicacion.tittle}}</h3>
+                    <h3 class="mt-0.5 text-2xl text-gray-900 font-bold">{{ publicacion.tittle }}</h3>
 
-                    <p class="mt-2 line-clamp-3 text-lg  text-gray-500">{{publicacion.content}}</p>
+                    <p class="mt-2 line-clamp-3 text-lg  text-gray-500">{{ publicacion.content }}</p>
 
-                    <img alt="" :src ="`http://localhost:8081/${publicacion.image}`" class="h-56 w-full object-cover rounded-lg mt-4 mb-4 " />
+                    <img alt="" :src="`http://localhost:8081/${publicacion.image}`"
+                        class="h-56 w-full object-cover rounded-lg mt-4 mb-4 " />
 
                     <div class="flex ">
 
 
-                        <button v-on:click="darMeGusta()" class="flex items-center mr-2 p-2 rounded-lg  hover:scale-125 transition duration-300" >
-                            
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-1">
-                                <path d="M7.493 18.5c-.425 0-.82-.236-.975-.632A7.48 7.48 0 0 1 6 15.125c0-1.75.599-3.358 1.602-4.634.151-.192.373-.309.6-.397.473-.183.89-.514 1.212-.924a9.042 9.042 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75A.75.75 0 0 1 15 2a2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H14.23c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23h-.777ZM2.331 10.727a11.969 11.969 0 0 0-.831 4.398 12 12 0 0 0 .52 3.507C2.28 19.482 3.105 20 3.994 20H4.9c.445 0 .72-.498.523-.898a8.963 8.963 0 0 1-.924-3.977c0-1.708.476-3.305 1.302-4.666.245-.403-.028-.959-.5-.959H4.25c-.832 0-1.612.453-1.918 1.227Z" />
+                        <button v-on:click="darMeGusta()"
+                            class="flex items-center mr-2 p-2 rounded-lg  hover:scale-125 transition duration-300">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-6 h-6 mr-1">
+                                <path
+                                    d="M7.493 18.5c-.425 0-.82-.236-.975-.632A7.48 7.48 0 0 1 6 15.125c0-1.75.599-3.358 1.602-4.634.151-.192.373-.309.6-.397.473-.183.89-.514 1.212-.924a9.042 9.042 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75A.75.75 0 0 1 15 2a2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H14.23c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23h-.777ZM2.331 10.727a11.969 11.969 0 0 0-.831 4.398 12 12 0 0 0 .52 3.507C2.28 19.482 3.105 20 3.994 20H4.9c.445 0 .72-.498.523-.898a8.963 8.963 0 0 1-.924-3.977c0-1.708.476-3.305 1.302-4.666.245-.403-.028-.959-.5-.959H4.25c-.832 0-1.612.453-1.918 1.227Z" />
                             </svg>
-            <span class="font-semibold text-xl">{{interaccionesVerdaderas.length}}</span>
+                            <span class="font-semibold text-xl">{{ interaccionesVerdaderas.length }}</span>
                         </button>
 
-                        <button v-on:click="darNoMeGusta()" class="flex items-center mx-2 p-2 rounded-lg  hover:scale-125 transition duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-1">
-                                <path d="M15.73 5.5h1.035A7.465 7.465 0 0 1 18 9.625a7.465 7.465 0 0 1-1.235 4.125h-.148c-.806 0-1.534.446-2.031 1.08a9.04 9.04 0 0 1-2.861 2.4c-.723.384-1.35.956-1.653 1.715a4.499 4.499 0 0 0-.322 1.672v.633A.75.75 0 0 1 9 22a2.25 2.25 0 0 1-2.25-2.25c0-1.152.26-2.243.723-3.218.266-.558-.107-1.282-.725-1.282H3.622c-1.026 0-1.945-.694-2.054-1.715A12.137 12.137 0 0 1 1.5 12.25c0-2.848.992-5.464 2.649-7.521C4.537 4.247 5.136 4 5.754 4H9.77a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23ZM21.669 14.023c.536-1.362.831-2.845.831-4.398 0-1.22-.182-2.398-.52-3.507-.26-.85-1.084-1.368-1.973-1.368H19.1c-.445 0-.72.498-.523.898.591 1.2.924 2.55.924 3.977a8.958 8.958 0 0 1-1.302 4.666c-.245.403.028.959.5.959h1.053c.832 0 1.612-.453 1.918-1.227Z" />
+                        <button v-on:click="darNoMeGusta()"
+                            class="flex items-center mx-2 p-2 rounded-lg  hover:scale-125 transition duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-6 h-6 mr-1">
+                                <path
+                                    d="M15.73 5.5h1.035A7.465 7.465 0 0 1 18 9.625a7.465 7.465 0 0 1-1.235 4.125h-.148c-.806 0-1.534.446-2.031 1.08a9.04 9.04 0 0 1-2.861 2.4c-.723.384-1.35.956-1.653 1.715a4.499 4.499 0 0 0-.322 1.672v.633A.75.75 0 0 1 9 22a2.25 2.25 0 0 1-2.25-2.25c0-1.152.26-2.243.723-3.218.266-.558-.107-1.282-.725-1.282H3.622c-1.026 0-1.945-.694-2.054-1.715A12.137 12.137 0 0 1 1.5 12.25c0-2.848.992-5.464 2.649-7.521C4.537 4.247 5.136 4 5.754 4H9.77a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23ZM21.669 14.023c.536-1.362.831-2.845.831-4.398 0-1.22-.182-2.398-.52-3.507-.26-.85-1.084-1.368-1.973-1.368H19.1c-.445 0-.72.498-.523.898.591 1.2.924 2.55.924 3.977a8.958 8.958 0 0 1-1.302 4.666c-.245.403.028.959.5.959h1.053c.832 0 1.612-.453 1.918-1.227Z" />
                             </svg>
                             <span class="font-semibold text-xl">{{ interaccionesFalsas.length }}</span>
                         </button>
-                        <button v-on:click="agregarComentario()" class="flex items-center mx-2 p-2 rounded-lg   hover:scale-125 transition duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-1">
-                                <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 0 0 6 21.75a6.721 6.721 0 0 0 3.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 0 1-.814 1.686.75.75 0 0 0 .44 1.223ZM8.25 10.875a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875-1.125a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Z" clip-rule="evenodd" />
+                        <button v-on:click="agregarComentario()"
+                            class="flex items-center mx-2 p-2 rounded-lg   hover:scale-125 transition duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-6 h-6 mr-1">
+                                <path fill-rule="evenodd"
+                                    d="M4.804 21.644A6.707 6.707 0 0 0 6 21.75a6.721 6.721 0 0 0 3.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 0 1-.814 1.686.75.75 0 0 0 .44 1.223ZM8.25 10.875a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875-1.125a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Z"
+                                    clip-rule="evenodd" />
                             </svg>
-                            <span class="font-semibold text-xl">{{comentarios.length}}</span>
+                            <span class="font-semibold text-xl">{{ comentarios.length }}</span>
                         </button>
 
 
@@ -61,21 +74,53 @@
 
             </article>
 
+            <form @submit.prevent="agregarComentario">
+                <textarea v-model="nuevoComentario" class="w-full rounded-lg border-gray-500 p-2 text-sm" placeholder="Escribe un comentario..." rows="5" ></textarea>
+                <div class="flex justify-end py-2 mb-4 px-2 mt-1">
+                    <button type="submit" class="inline-block w-full rounded-lg bg-black px-5 py-3 font-semibold text-lg text-white sm:w-auto">
+                        Enviar
+                    </button>
+                </div>
+            </form>
+
+            <div v-for="(comentario, indexComment) in comentarios" :key="indexComment" class=" pt-4 bg-white p-4 shadow-md  mx-auto" >
+                <div class=" border-t border-zinc-300 dark:border-zinc-700 py-3 ">
+                    <div class=" flex items-start space-x-3">
+                        <img class="w-10 h-10 rounded-full" src="https://placehold.co/40x40" alt="user profile picture">
+                        <div class="flex-1 ">
+                            <div class="flex items-center space-x-1">
+                                <span class="font-bold text-black">{{ user.username }}</span>
+                            </div>
+                            <div class="text-black mt-1">{{ comentario.content }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="text-white mt-12"></h2>
+
+
+            
+           
+
+
+
+    
         </div>
     </div>
+    
 
 
-
-    <footer-component></footer-component>
+    <footer-component ></footer-component>
 
 </template>
 <script>
 import NavbarComponent from '@/components/NavbarComponent.vue';
 import AsideComponent from '@/components/AsideComponente.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
-import { capitalizarPrimeraPalabra,obtenerPublicacionesPorId,obtenerComentarios,obtenerInteraccion, obtenerUsuarioPorID, likePost,dislikePost, datosUsuarioLogeado } from '@/services/foroService';
+import { capitalizarPrimeraPalabra, obtenerPublicacionesPorId, obtenerComentarios, obtenerInteraccion, obtenerUsuarioPorID, likePost, dislikePost, crearComentario, datosUsuarioLogeado } from '@/services/foroService';
 import { colorDictionary } from '@/services/foroService';
-import { onMounted,ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 export default {
     components: {
@@ -85,100 +130,121 @@ export default {
     },
 
     props: {
-      postId: {
-        type: Number,
-        required: true
-      }
+        postId: {
+            type: Number,
+            required: true
+        }
     },
     setup(props) {
-      const publicacion = ref(null);
-      const comentarios = ref([]);
-      const interaccion = ref([]);
-      const usuario = ref([]);
-      const user = datosUsuarioLogeado();
+        const publicacion = ref(null);
+        const comentarios = ref([]);
+        const interaccion = ref([]);
+        const usuario = ref([]);
+        const user = datosUsuarioLogeado();
+        const nuevoComentario = ref('');
 
-      let interaccionesVerdaderas = ref([]);
-      let interaccionesFalsas = ref([]);
-
-    
-      // Método para cargar la publicación y sus detalles
-      const cargarPublicacion = async () => {
-        try {
-          // Obtener la publicación por su ID
-            const resultadoPublicacion = await obtenerPublicacionesPorId(props.postId);
-            publicacion.value = resultadoPublicacion;
-            console.log("VER PUBLI PERO EL ID DEL USUARIO : ",publicacion.value);
-            
-            const resultadoUsuario = await obtenerUsuarioPorID(publicacion.value.user)
-            usuario.value = resultadoUsuario;
-            console.log("USUARIO DE LA PUBLICACION -> : ",usuario.value);
-
-            // Obtener comentarios de la publicación
-            const resultadoComentarios = await obtenerComentarios(props.postId);
-            comentarios.value = resultadoComentarios;
-
-            // Obtener interacciones de la publicación
-            const resultadoInteraccion = await obtenerInteraccion(props.postId);
-            interaccion.value = resultadoInteraccion;
-
-            interaccionesVerdaderas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === true);
-            interaccionesFalsas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === false);
-            
-
-        } catch (error) {
-          console.error('Error al cargar la publicación:', error.message);
-        }
-      };
-      const darMeGusta = async () => {
-      if (user) {
-        console.log("quien es user -> ",user.id);
-        try {
-          await likePost(user.id, props.postId);
-          const resultadoInteraccion = await obtenerInteraccion(props.postId);
-          interaccion.value = resultadoInteraccion;
-          interaccionesVerdaderas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === true);
-          interaccionesFalsas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === false);
-        } catch (error) {
-          console.error('Error al dar like:', error.message);
-        }
-      }
-    };
-
-    const darNoMeGusta = async () => {
-      if (user) {
-        try {
-          await dislikePost(user.id, props.postId);
-          const resultadoInteraccion = await obtenerInteraccion(props.postId);
-          interaccion.value = resultadoInteraccion;
-          interaccionesVerdaderas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === true);
-          interaccionesFalsas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === false);
-        } catch (error) {
-          console.error('Error al dar dislike:', error.message);
-        }
-      }
-    };
+        let interaccionesVerdaderas = ref([]);
+        let interaccionesFalsas = ref([]);
 
 
-      // Cargar la publicación al montar el componente
-      onMounted(cargarPublicacion);
+        // Método para cargar la publicación y sus detalles
+        const cargarPublicacion = async () => {
+            try {
+                // Obtener la publicación por su ID
+                const resultadoPublicacion = await obtenerPublicacionesPorId(props.postId);
+                publicacion.value = resultadoPublicacion;
+                console.log("VER PUBLI PERO EL ID DEL USUARIO : ", publicacion.value);
 
-      return {
-        publicacion,
-        comentarios,
-        interaccion,
-        usuario,
-        interaccionesVerdaderas,
-        interaccionesFalsas,
-        agregarFondoCategoria: (categoria) => colorDictionary[categoria],
-        capitalizarPrimeraPalabra,
-        darMeGusta,
-        darNoMeGusta
+                const resultadoUsuario = await obtenerUsuarioPorID(publicacion.value.user)
+                usuario.value = resultadoUsuario;
+                console.log("USUARIO DE LA PUBLICACION -> : ", usuario.value);
 
-      };
+                // Obtener comentarios de la publicación
+                const resultadoComentarios = await obtenerComentarios(props.postId);
+                comentarios.value = resultadoComentarios;
+
+                // Obtener interacciones de la publicación
+                const resultadoInteraccion = await obtenerInteraccion(props.postId);
+                interaccion.value = resultadoInteraccion;
+
+                interaccionesVerdaderas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === true);
+                interaccionesFalsas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === false);
+
+
+            } catch (error) {
+                console.error('Error al cargar la publicación:', error.message);
+            }
+        };
+        const darMeGusta = async () => {
+            if (user) {
+                console.log("quien es user -> ", user.id);
+                try {
+                    await likePost(user.id, props.postId);
+                    const resultadoInteraccion = await obtenerInteraccion(props.postId);
+                    interaccion.value = resultadoInteraccion;
+                    interaccionesVerdaderas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === true);
+                    interaccionesFalsas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === false);
+                    await cargarPublicacion();
+                } catch (error) {
+                    console.error('Error al dar like:', error.message);
+                }
+            }
+        };
+
+        const darNoMeGusta = async () => {
+            if (user) {
+                try {
+                    await dislikePost(user.id, props.postId);
+                    const resultadoInteraccion = await obtenerInteraccion(props.postId);
+                    interaccion.value = resultadoInteraccion;
+                    interaccionesVerdaderas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === true);
+                    interaccionesFalsas.value = resultadoInteraccion.filter(interaccion => interaccion.typeInteraction === false);
+                    await cargarPublicacion();
+                } catch (error) {
+                    console.error('Error al dar dislike:', error.message);
+                }
+            }
+        };
+        const agregarComentario = async () => {
+            console.log("new comentario siuuu afuera del if -> ", nuevoComentario.value)
+            if (user && nuevoComentario.value.trim() !== '') {
+                console.log("new comentario siuuu ", nuevoComentario.value)
+                try {
+                    await crearComentario(nuevoComentario.value, user.id, props.postId);
+                    nuevoComentario.value = '';
+                    await cargarPublicacion();  // Recargar la publicación para obtener los nuevos comentarios
+                } catch (error) {
+                    console.error('Error al agregar comentario:', error.message);
+                    alert(error.message);
+                }
+            }
+        };
+
+
+
+        // Cargar la publicación al montar el componente
+        onMounted(cargarPublicacion);
+
+        return {
+            publicacion,
+            comentarios,
+            interaccion,
+            usuario,
+            interaccionesVerdaderas,
+            interaccionesFalsas,
+            nuevoComentario,
+            user,
+            agregarFondoCategoria: (categoria) => colorDictionary[categoria],
+            capitalizarPrimeraPalabra,
+            darMeGusta,
+            darNoMeGusta,
+            agregarComentario
+
+        };
     }
-  };
+};
 
-    
+
 </script>
 
 <style></style>

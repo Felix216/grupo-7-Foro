@@ -38,16 +38,6 @@ export const obtenerPublicaciones = async () => {
 };
 
 
-export const obtenerComentarios = async(postId) => {
-  try {
-    const resultado = await axios.get(`${API_URL_COMMENT}/${postId}`);
-    console.log(`Comentarios obtenidos:`, resultado.data);
-    return resultado.data;
-
-} catch (error) {
-    console.log(`Error en obtener todas las Comentarios: ${error.message}`);
-  }
-}
 
 export const obtenerInteraccion = async (postId) => {
   try {
@@ -147,6 +137,31 @@ export const dislikePost = async (userId, postId) => {
     console.error(`Error creating dislike interaction: ${error.message}`);
     throw error;
   }
+};
+
+
+//COMENTARIOS 
+
+
+export const obtenerComentarios = async(postId) => {
+  try {
+    const resultado = await axios.get(`${API_URL_COMMENT}/${postId}`);
+    console.log(`Comentarios obtenidos:`, resultado.data);
+    return resultado.data;
+
+} catch (error) {
+    console.log(`Error en obtener todas las Comentarios: ${error.message}`);
+  }
+}
+
+export const crearComentario = async (content, userId, postId) => {
+  return await axios.post(API_URL_COMMENT, null, {
+      params: {
+          content: content,
+          userId: userId,
+          postId: postId
+      }
+  });
 };
 
 
