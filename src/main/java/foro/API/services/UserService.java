@@ -1,6 +1,7 @@
 package foro.API.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,5 +49,15 @@ public class UserService {
         userToUpdate.setPassword(userToUpdate.getPassword());
 
         return userRepository.save(userToUpdate);
+    }
+    public User login(String email, String password) {
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            if (password.equals(user.getPassword())) {
+                return user;
+            }
+        }
+        return null;
     }
 }
