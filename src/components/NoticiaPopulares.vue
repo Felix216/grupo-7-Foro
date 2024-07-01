@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { buscarPublicacion } from '@/services/foroService';
+import { obtenerPublicacionesPorCategoria } from '@/services/foroService';
 
 
 
@@ -59,8 +59,7 @@ export default {
     methods: {
 
         async fetchPublicacionesNoticia() {
-            this.publicaciones = await buscarPublicacion(this.identificador, this.valor);
-            console.log(this.publicaciones);
+            this.publicaciones = await obtenerPublicacionesPorCategoria(this.valor);
         },
 
 
