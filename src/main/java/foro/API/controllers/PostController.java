@@ -1,10 +1,13 @@
 package foro.API.controllers;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +25,7 @@ public class PostController {
     @Autowired
     private final PostService postService;
 
-    @GetMapping()
+     @GetMapping()
     public ResponseEntity<?> getAllPost() throws Exception {
         try {
             return ResponseEntity.ok(postService.getAll());
@@ -31,10 +34,27 @@ public class PostController {
         }
     }
 
+    @GetMapping("/{postId}")
+     public ResponseEntity<Post> getPostForId(@PathVariable Long postId) throws Exception {
+        Post post = postService.getPostByID(postId);
+        return ResponseEntity.ok(post);
+    }
+
     @GetMapping("/popular")
     public ResponseEntity<?> getAllPostForPopularidad() throws Exception {
         try {
             return ResponseEntity.ok(postService.getPostsOrderByLikes());
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+    
+    @GetMapping("/category/{category}")
+    public ResponseEntity<?> getAllPostForCategory(@PathVariable String category) throws Exception {
+        try {
+            List<Post> posts = postService.findAllByCategory(category);
+            return new ResponseEntity<>(posts, HttpStatus.OK);
+
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
@@ -54,5 +74,6 @@ public class PostController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
 }
 
