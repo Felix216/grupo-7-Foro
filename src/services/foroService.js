@@ -1,6 +1,4 @@
 import axios from "axios";
-//const API_URL_PUBLICACIONES = "http://localhost:3000/posts";
-
 
 //Obtener Post Controller
 
@@ -111,31 +109,6 @@ export const obtenerPublicacionesPorCategoria = async (categoria) => {
     throw error;
   }
 };
-
-/*
-export const crearPublicacionPost = async (userId,username,tittle,category,content,image,likes,dislikes) => {
-    
-  try {
-        const nuevaPublicacion = {
-        userId,
-        username,
-        tittle,
-        category,
-        content,
-        image,
-        likes,
-        dislikes
-        };
-
-
-        const resultado = await axios.post(`${API_URL_PUBLICACIONES}`, nuevaPublicacion);
-
-        return resultado.data;
-
-    } catch (error) {
-        console.log(`Error en crear una publicacion: ${error.message}`);
-    }
-};*/
 
 // Crear una nueva publicación
 export const crearPublicacionPost = async (userId, tittle, category, content, image) => {

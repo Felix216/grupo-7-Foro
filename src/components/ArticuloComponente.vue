@@ -72,7 +72,6 @@
     <article v-else-if="mostrarFiltro"
       class="overflow-hidden rounded-lg shadow transition hover:shadow-2xl px-6 my-4  bg-white "
       v-for="(publicacionfiltrada, indexFiltro) in publicacionesFiltradas" :key="indexFiltro">
-      <h1>PUBLICACIONES FILTRADAS SIUUU</h1>
       <div v-if="publicacionfiltrada.usuarios" class="flex-auto justify-center my-4">
         <span class="mx-2 text-xl font-bold">{{ publicacionfiltrada.usuarios.username }}</span>
         <span class="mx-2 rounded-full px-4 py-1  text-base text-white "
