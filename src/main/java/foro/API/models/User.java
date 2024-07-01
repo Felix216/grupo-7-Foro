@@ -42,6 +42,9 @@ public class User {
     @Column(length = 50, nullable = false)
     private String password;
 
+    @Column(length = 100000)
+    private String profilePicture;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIdentityReference(alwaysAsId = true)
     private List<Comment> commentsListUser = new ArrayList<>();
