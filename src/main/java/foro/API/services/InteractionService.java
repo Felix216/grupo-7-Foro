@@ -1,4 +1,6 @@
 package foro.API.services;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,4 +62,14 @@ public class InteractionService {
         return user.getInteractionsListUser().stream()
                 .anyMatch(interaction -> interaction.getPost().equals(post));
     }
+
+    public List<Interaction> getAllInteractionsForPost(Long postId)throws Exception{
+        
+        try{
+            return interactionRepository.findByPostId(postId);
+        }catch(Exception e){
+            throw new Exception("Error fetching data: " + e.getMessage());
+        }
+    }
 }
+
