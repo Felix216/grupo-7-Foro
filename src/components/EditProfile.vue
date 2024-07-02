@@ -12,7 +12,7 @@
                     <img :src="this.user.profilePicture" alt="pfp" class="w-20 h-20 mb-2 ml-2 rounded border border-gray-200">
                     <div class="flex flex-col ml-10 mb-4 mt-4">
                         <label for="subirAvatar" class="bg-blue-600 text-white rounded px-6 py-2 mb-2 hover:bg-blue-500 shadow">Subir Avatar</label>
-                        <input id="subirAvatar" type="file" @change="archivoSeleccionado('perfil', $event)" class="hidden"/>
+                        <input id="subirAvatar" type="file" @change="handleFileUpload" class="hidden"/>
                     </div>
                 </div>
                 <label class="ml-2">Nombre de Usuario</label>
@@ -39,8 +39,7 @@
                 name: this.user.name,
                 lastname: this.user.lastname,
                 description: this.user.description,
-                perfil: null,
-                banner: null
+                perfil: null
             }
         },
         methods: {
@@ -58,7 +57,7 @@
                             lastname: this.lastname,
                             email: this.user.email,
                             description: this.description,
-                            password: this.user.password,
+                            password: this.user.password
                         }
                     );
 
@@ -91,22 +90,9 @@
             cerrar() {
                 this.$emit('close');
             },
-            archivoSeleccionado(tipo, evento) {
-                let files = evento.target.files || evento.dataTransfer.files;
-                if (!files.length)
-                    return;
-                this.crearImagenJSON(tipo, files[0]);
-            },
-            crearImagenJSON(tipo, archivo) {
-                let leerArchivo = new FileReader();
-                leerArchivo.onload = (e) => {
-                    if (tipo === 'perfil') {
-                        this.perfil = e.target.result;
-                    } else if (tipo === 'banner') {
-                        this.banner = e.target.result;
-                    }
-                };
-                leerArchivo.readAsDataURL(archivo);
+            handleFileUpload(event) {
+                this.perfil = event.target.files[0];
+                console.log(this.perfil)
             }
         }
     }

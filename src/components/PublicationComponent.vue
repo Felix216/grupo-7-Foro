@@ -4,8 +4,6 @@
             <div class="flex justify-between items-center -my-2">
                 <div>
                     <span class="text-md font-bold">{{ post.username }}</span>
-                    <span class="ml-2">•</span>
-                    <time class="text-xs text-gray-500 ml-2">{{ post.date }}</time>
                 </div>
                 <div v-if="mostrar">
                     <button class="text-gray-500 hover:text-gray-700 focus:outline-none">
