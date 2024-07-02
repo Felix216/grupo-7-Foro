@@ -89,7 +89,7 @@
                         <img class="w-10 h-10 rounded-full" src="https://placehold.co/40x40" alt="user profile picture">
                         <div class="flex-1 ">
                             <div class="flex items-center space-x-1">
-                                <span class="font-bold text-black">{{ user.username }}</span>
+                                <span class="font-bold text-black">{{getUsername(comentario.user)}}</span>
                             </div>
                             <div class="text-black mt-1">{{ comentario.content }}</div>
                         </div>
@@ -143,6 +143,8 @@ export default {
         const user = datosUsuarioLogeado();
         const nuevoComentario = ref('');
 
+        const usuariosComentarios = ref({}); // Almacenar los datos de los usuarios que hacen comentarios
+
         let interaccionesVerdaderas = ref([]);
         let interaccionesFalsas = ref([]);
 
@@ -163,6 +165,11 @@ export default {
                 const resultadoComentarios = await obtenerComentarios(props.postId);
                 comentarios.value = resultadoComentarios;
 
+                 // Obtener los usuarios de cada comentario
+                 for (let comentario of resultadoComentarios) {
+                  const usuarioComentario = await obtenerUsuarioPorID(comentario.user);
+                  usuariosComentarios.value[comentario.id] = usuarioComentario;
+                }
                 // Obtener interacciones de la publicación
                 const resultadoInteraccion = await obtenerInteraccion(props.postId);
                 interaccion.value = resultadoInteraccion;
@@ -220,6 +227,14 @@ export default {
             }
         };
 
+        const getUserId = async (userId)=> {
+            const result =  await obtenerUsuarioPorID(userId);
+            return result.value
+        }
+
+        const getUsername = (userId) => {
+            return usuariosComentarios.value[userId]?.username || 'Unknown';
+        };
 
 
         // Cargar la publicación al montar el componente
@@ -238,7 +253,10 @@ export default {
             capitalizarPrimeraPalabra,
             darMeGusta,
             darNoMeGusta,
-            agregarComentario
+            agregarComentario,
+            getUserId,
+            getUsername
+        
 
         };
     }
