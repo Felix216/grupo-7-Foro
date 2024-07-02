@@ -106,6 +106,14 @@ public class PostService {
                 () -> new Exception("This post doesn't exist!"));
     }
 
+    public List<Post> getPostsByUserId(Long userId) throws Exception{
+        try{
+            return postRepository.findByUserId(userId);
+        }catch(Exception e){
+            throw new Exception("Error fetching data: " + e.getMessage());
+        }
+    }
+
     public List<Post> findAllByCategory(String category) throws Exception {
         try {
             return postRepository.findAllByCategory(category);

@@ -59,6 +59,12 @@ public class PostController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+    
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Post>> getAllPostsByUserId(@PathVariable Long userId) throws Exception {
+        List<Post> posts = postService.getPostsByUserId(userId);
+        return ResponseEntity.ok(posts);
+    }
 
     @PostMapping
     public ResponseEntity<?> createPostController(

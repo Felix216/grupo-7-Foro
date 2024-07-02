@@ -9,5 +9,5 @@ import foro.API.models.Post;
 @Repository
 public interface PostRepositorio extends JpaRepository<Post,Long> {
     List<Post> findAllByCategory(String category);
-
+    List<Post> findByUserId(Long userId);
 }
