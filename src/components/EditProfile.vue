@@ -51,19 +51,21 @@
                     return;
                 }
                 try {
-                    let result = await axios.patch(
-                        `http://localhost:3000/users/${this.user.id}`,
+                    let result = await axios.put(
+                        `http://localhost:8081/api/users`,
                         {
+                            id: this.user.id,
                             username: this.username,
                             name: this.name,
                             lastname: this.lastname,
+                            email: this.user.email,
                             description: this.description,
-                            profilePicture: this.perfil,
-                            profileBanner: this.banner
+                            password: this.user.password,
                         }
                     );
 
-                    if (result.status==200) {
+                    if (result.status == 200) {
+                        window.location.reload();
                         this.$emit('guardadoExitoso');
                     }
                 } catch (error) {

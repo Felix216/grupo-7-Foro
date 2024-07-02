@@ -65,6 +65,7 @@
                         name: this.name,
                         lastname: this.lastname,
                         email: this.email,
+                        description: '',
                         password: this.password
                     });
 
