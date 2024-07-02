@@ -164,6 +164,17 @@ export const crearComentario = async (content, userId, postId) => {
   });
 };
 
+export const eliminarComentario = async (commentId, userId) => {
+  try {
+    const response = await axios.delete(`${API_URL_COMMENT}/${commentId}`, {
+      params: { userId: userId }
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error al eliminar el comentario');
+  }
+};
+
 
 
 export const datosUsuarioLogeado = () => {

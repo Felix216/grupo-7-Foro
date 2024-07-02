@@ -77,7 +77,7 @@
             <form @submit.prevent="agregarComentario">
                 <textarea v-model="nuevoComentario" class="w-full rounded-lg border-gray-500 p-2 text-sm" placeholder="Escribe un comentario..." rows="5" ></textarea>
                 <div class="flex justify-end py-2 mb-4 px-2 mt-1">
-                    <button type="submit" class="inline-block w-full rounded-lg bg-black px-5 py-3 font-semibold text-lg text-white sm:w-auto">
+                    <button type="submit" class="inline-block w-full rounded-lg bg-black px-5 hover:scale-110 transition  py-3 font-semibold text-lg text-white sm:w-auto">
                         Enviar
                     </button>
                 </div>
@@ -89,7 +89,8 @@
                         <img class="w-10 h-10 rounded-full" src="https://placehold.co/40x40" alt="user profile picture">
                         <div class="flex-1 ">
                             <div class="flex items-center space-x-1">
-                                <span class="font-bold text-black">{{ user.username }}</span>
+                                <span class="font-bold text-black">{{getUsername(comentario.user)}} </span>
+                                <button v-if="comentario.user === user.id" @click="eliminarComentarioDelUsuario(comentario.id)" class="flex justify-end text-red-500 hover:text-red-800">Eliminar</button>
                             </div>
                             <div class="text-black mt-1">{{ comentario.content }}</div>
                         </div>
@@ -118,7 +119,7 @@
 import NavbarComponent from '@/components/NavbarComponent.vue';
 import AsideComponent from '@/components/AsideComponente.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
-import { capitalizarPrimeraPalabra, obtenerPublicacionesPorId, obtenerComentarios, obtenerInteraccion, obtenerUsuarioPorID, likePost, dislikePost, crearComentario, datosUsuarioLogeado } from '@/services/foroService';
+import { capitalizarPrimeraPalabra,eliminarComentario, obtenerPublicacionesPorId, obtenerComentarios, obtenerInteraccion, obtenerUsuarioPorID, likePost, dislikePost, crearComentario, datosUsuarioLogeado } from '@/services/foroService';
 import { colorDictionary } from '@/services/foroService';
 import { onMounted, ref } from 'vue';
 
@@ -143,6 +144,8 @@ export default {
         const user = datosUsuarioLogeado();
         const nuevoComentario = ref('');
 
+        const usuariosComentarios = ref({}); // Almacenar los datos de los usuarios que hacen comentarios
+
         let interaccionesVerdaderas = ref([]);
         let interaccionesFalsas = ref([]);
 
@@ -163,6 +166,11 @@ export default {
                 const resultadoComentarios = await obtenerComentarios(props.postId);
                 comentarios.value = resultadoComentarios;
 
+                 // Obtener los usuarios de cada comentario
+                 for (let comentario of resultadoComentarios) {
+                  const usuarioComentario = await obtenerUsuarioPorID(comentario.user);
+                  usuariosComentarios.value[comentario.id] = usuarioComentario;
+                }
                 // Obtener interacciones de la publicación
                 const resultadoInteraccion = await obtenerInteraccion(props.postId);
                 interaccion.value = resultadoInteraccion;
@@ -219,7 +227,24 @@ export default {
                 }
             }
         };
+        const eliminarComentarioDelUsuario = async (commentId) => {
+            try {
+                await eliminarComentario(commentId,user.id);
+                await cargarPublicacion(); 
+            } catch (error) {
+                console.error('Error al eliminar comentario:', error.message);
+                alert(error.message);
+            }
+    };
 
+        const getUserId = async (userId)=> {
+            const result =  await obtenerUsuarioPorID(userId);
+            return result.value
+        }
+
+        const getUsername = (userId) => {
+            return usuariosComentarios.value[userId]?.username || 'Unknown';
+        };
 
 
         // Cargar la publicación al montar el componente
@@ -238,7 +263,11 @@ export default {
             capitalizarPrimeraPalabra,
             darMeGusta,
             darNoMeGusta,
-            agregarComentario
+            agregarComentario,  
+            getUserId,
+            eliminarComentarioDelUsuario,
+            getUsername
+        
 
         };
     }
