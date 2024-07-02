@@ -51,9 +51,10 @@
                     return;
                 }
                 try {
-                    let result = await axios.patch(
-                        `http://localhost:3000/posts/${this.postID}`,
+                    let result = await axios.put(
+                        `http://localhost:8081/api/posts`,
                         {
+                            id: this.postID,
                             tittle: this.tittle,
                             category: this.category,
                             content: this.content,

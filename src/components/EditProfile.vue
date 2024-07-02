@@ -9,12 +9,10 @@
             <h1 class="text-lg font-bold mb-2 ml-2">Editar Perfil</h1>
             <div class="flex flex-col">
                 <div class="flex flex-row items-center">
-                    <img :src="this.user.profilePicture" alt="banner" class="w-20 h-20 mb-2 ml-2 rounded border border-gray-200">
+                    <img :src="this.user.profilePicture" alt="pfp" class="w-20 h-20 mb-2 ml-2 rounded border border-gray-200">
                     <div class="flex flex-col ml-10 mb-4 mt-4">
                         <label for="subirAvatar" class="bg-blue-600 text-white rounded px-6 py-2 mb-2 hover:bg-blue-500 shadow">Subir Avatar</label>
                         <input id="subirAvatar" type="file" @change="archivoSeleccionado('perfil', $event)" class="hidden"/>
-                        <label for="subirBanner" class="bg-blue-600 text-white rounded px-6 py-2 mb-2 hover:bg-blue-500 shadow">Subir Portada</label>
-                        <input  id="subirBanner" type="file" @change="archivoSeleccionado('banner', $event)" class="hidden"/>
                     </div>
                 </div>
                 <label class="ml-2">Nombre de Usuario</label>

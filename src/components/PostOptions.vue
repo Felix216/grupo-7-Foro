@@ -37,7 +37,7 @@
         methods: {
             async borrarPost() {
                 try {
-                    let result = await axios.delete(`http://localhost:3000/posts/${this.ID}`);
+                    let result = await axios.delete(`http://localhost:8081/api/posts/${this.ID}`);
 
                     if (result.status == 200) {
                         alert("Publicacion eliminada con exito.")

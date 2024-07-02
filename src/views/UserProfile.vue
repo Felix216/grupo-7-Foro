@@ -7,7 +7,7 @@
             <AsideComponente :user="user"/>
             <!-- CONTAINER PRINCIPAL -->
             <div class="flex flex-col relative bg-white my-4 mr-8 rounded-2xl shadow-lg w-1/2">
-                <img :src="user.profileBanner" alt="profile-banner" class="rounded-tl-2xl rounded-tr-2xl w-full h-44 object-cover">
+                <div class="rounded-tl-2xl rounded-tr-2xl w-full h-44 bg-slate-50"></div>
                 <div class="absolute top-28 left-16">
                     <img :src="user.profilePicture" alt="profile-picture" class="rounded-full w-32 h-32">
                 </div>
@@ -91,7 +91,7 @@
             },
             async obtenerPosts(id) {
                 try {
-                    let result = await axios.get(`http://localhost:3000/posts?userId=${id}`);
+                    let result = await axios.get(`http://localhost:8081/api/posts/user/${id}`);
                     
                     if (result.status == 200) {
                         this.posts = result.data;
