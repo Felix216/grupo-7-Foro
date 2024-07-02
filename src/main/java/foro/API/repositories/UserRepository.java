@@ -11,4 +11,5 @@ import foro.API.models.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     
     Optional<User> findByEmail(String email);
+    
 }
