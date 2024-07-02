@@ -16,9 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/api/posts/comments")
@@ -50,4 +52,30 @@ public class CommentController {
         Comment comment = commentService.createComment(content,userId,postID);
         return new ResponseEntity<>(comment, HttpStatus.CREATED);
     }
+
+
+     @PutMapping("/{commentId}")
+    public ResponseEntity<Comment> updateCommentController(
+            @PathVariable Long commentId,
+            @RequestParam("content") String content) {
+        try {
+            Comment updatedComment = commentService.updateComment(commentId, content);
+            return ResponseEntity.ok(updatedComment);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<Void> deleteCommentController(
+            @PathVariable Long commentId,
+            @RequestParam("userId") Long userId) {
+        try {
+            commentService.deleteComment(commentId, userId);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+    }
+
 }

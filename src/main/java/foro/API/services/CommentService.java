@@ -2,6 +2,7 @@ package foro.API.services;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,32 @@ public class CommentService {
             return commentRepository.findAll();
         }catch(Exception e){
             throw new Exception("Error fetching data: " + e.getMessage());
+        }
+    }
+
+
+    public Comment updateComment(Long commentId, String content) throws Exception {
+        Optional<Comment> optionalComment = commentRepository.findById(commentId);
+        if (optionalComment.isPresent()) {
+            Comment comment = optionalComment.get();
+            comment.setContent(content);
+            return commentRepository.save(comment);
+        } else {
+            throw new Exception("Comment not found");
+        }
+    }
+
+    public void deleteComment(Long commentId, Long userId) throws Exception {
+        Optional<Comment> optionalComment = commentRepository.findById(commentId);
+        if (optionalComment.isPresent()) {
+            Comment comment = optionalComment.get();
+            if (Long.valueOf(comment.getUser().getId()).equals(userId)) {
+                commentRepository.deleteById(commentId);
+            } else {
+                throw new Exception("You are not authorized to delete this comment");
+            }
+        } else {
+            throw new Exception("Comment not found");
         }
     }
 
