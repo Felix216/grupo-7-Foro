@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import foro.API.models.Post;
 import foro.API.models.User;
 import foro.API.repositories.PostRepositorio;
@@ -138,5 +137,21 @@ public class PostService {
     private String getPublicImageUrl(String filename) {
         // Construir la URL completa de la imagen pública
         return filename; 
+    }
+
+    public Post updatePost(Post postDetails) throws Exception {
+        Post postToUpdate = postRepository.findById(postDetails.getId())
+        .orElseThrow(() -> new Exception("This post doesn't exist!"));
+
+        postToUpdate.setTittle(postDetails.getTittle());
+        postToUpdate.setCategory(postDetails.getCategory());
+        postToUpdate.setContent(postDetails.getContent());
+        postToUpdate.setImage(postToUpdate.getImage());
+
+        return postRepository.save(postToUpdate);
+    }
+
+    public void deletePostByID(Long id) throws Exception {
+        postRepository.deleteById(id);
     }
 }
