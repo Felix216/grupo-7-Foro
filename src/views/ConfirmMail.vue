@@ -34,13 +34,17 @@
                 }
                 try {
                     let result = await axios.get(
-                        `http://localhost:3000/users?email=${this.email}`
+                        `http://localhost:8081/api/users/email/${this.email}`
                     );
-                    if (result.status==200 && result.data.length > 0) {
-                        localStorage.setItem("usuarioContraseñaNueva", JSON.stringify(result.data[0]));
-                        this.$router.push({name:'changePassword'});
-                    } else {
-                        alert("No se encontro usuario")
+                    if (result.status == 200) {
+                        let user = result.data;
+                            
+                        if (user) {
+                            localStorage.setItem("usuarioContraseñaNueva", JSON.stringify(user));
+                            this.$router.push({ name: 'changePassword' });
+                        } else {
+                            alert("No se encontró usuario");
+                        }
                     }
                 } catch (error) {
                     console.error(error)

@@ -39,8 +39,7 @@
                     return;
                 }
                 try {
-                    let result = await axios.patch(
-                        `http://localhost:3000/users/${this.user.id}`,
+                    let result = await axios.put(`http://localhost:8081/api/users/${this.user.id}/updatePassword`,
                         {
                             password: this.password
                         }

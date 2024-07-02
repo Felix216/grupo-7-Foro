@@ -75,9 +75,9 @@
         methods: {
             async fetchUser(id) {
                 try {
-                    let result = await axios.get(`http://localhost:3000/users/${id}`);
-                    
-                    if (result.status==200) {
+                    let result = await axios.get(`http://localhost:8081/api/users/${id}`);
+
+                    if (result.status == 200) {
                         this.user = result.data;
                         this.isOwnProfile = this.loggedUser && this.loggedUser.id === this.user.id;
                     }
@@ -95,19 +95,6 @@
                     
                     if (result.status == 200) {
                         this.posts = result.data;
-                    }
-                } catch (error) {
-                    console.error(error);
-                }
-            },
-            async actualizarLocalStorage() {
-                try {
-                    let result = await axios.get(
-                        `http://localhost:3000/users/${this.user.id}`
-                    );
-                    if (result.status==200) {
-                        localStorage.setItem("usuarioLogeado", JSON.stringify(result.data));
-                        window.location.reload();
                     }
                 } catch (error) {
                     console.error(error);
