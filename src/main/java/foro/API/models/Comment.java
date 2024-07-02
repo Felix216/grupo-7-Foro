@@ -1,6 +1,10 @@
 package foro.API.models;
 
  
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +18,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "comment")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Comment {
 
     @Id
@@ -32,14 +37,16 @@ public class Comment {
 
      //Relacion con Usuario,  1 usuario puede tener muchos comentarios
 
-     @ManyToOne
-     @JoinColumn(name = "user_id",nullable = false)
-     private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id",nullable = false)
+    @JsonIdentityReference(alwaysAsId = true)
+    private User user;
 
      //Relacion con publicaciones, 1 publicacion puede tener muchos comentarios
      // lo mismo que decir = "Muchos comentarios estan en 1 publicacion"
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
+    @JsonIdentityReference(alwaysAsId = true)
     private Post post;
 
 
